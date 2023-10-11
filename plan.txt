@@ -1,0 +1,8 @@
+List of hotels
+Booking a hotel
+Reservation ticket
+
+Classes:
+User
+Hotel
+ReservationTicket
