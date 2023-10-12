@@ -42,7 +42,7 @@ class ReservationTicket:
 
 
 class CreditCard:
-    def __int__(self, number):
+    def __init__(self, number):
         self.number = number
 
     def validate(self, expiration, holder, cvc):
@@ -58,7 +58,7 @@ hotel_ID = input("Enter hotel id: ")
 hotel = Hotel(hotel_ID)
 
 if hotel.available():
-    credit_card = CreditCard(number="1234")
+    credit_card = CreditCard(number="1234567890123456")
     if credit_card.validate(expiration="12/26", holder="JOHN SMITH", cvc="123"):
         hotel.book()
         name = input("Enter your name: ")
