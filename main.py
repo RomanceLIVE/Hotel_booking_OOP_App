@@ -1,29 +1,22 @@
-import pandas
+import pandas as pd  # Import Pandas with alias
 
 # Creating dataframe
-
-df = pandas.read_csv("hotels.csv", dtype={"id": str})
-df_cards = pandas.read_csv("cards.csv", dtype=str).to_dict(orient="records")
+df = pd.read_csv("hotels.csv", dtype={"id": str})
+df_cards = pd.read_csv("cards.csv", dtype=str).to_dict(orient="records")
 
 
 class Hotel:
     def __init__(self, hotel_id):
         self.hotel_id = hotel_id
-        self.name = df.loc[df["id"] == self.hotel_id, "name"].squeeze()  # we use squeeze to extract the actual string
-        pass
+        self.name = df.loc[df["id"] == self.hotel_id, "name"].squeeze()  # Extract hotel name using 'squeeze'
 
     def book(self):
         df.loc[df["id"] == self.hotel_id, "available"] = "no"
-        df.to_csv("hotels.csv", index=False)  # so that we don't add another column index
-        pass
+        df.to_csv("hotels.csv", index=False)  # Save to CSV without index
 
     def available(self):
-        availability = df.loc[df["id"] == self.hotel_id, "available"].squeeze()
-        if availability == "yes":
-            return True
-        else:
-            return False
-        pass
+        # Simplified method to return availability
+        return df.loc[df["id"] == self.hotel_id, "available"].squeeze() == "yes"
 
 
 class ReservationTicket:
@@ -33,7 +26,7 @@ class ReservationTicket:
 
     def generate(self):
         content = f"""
-        Thank you for your reservation !
+        Thank you for your reservation!
         Here is your booking info:
         Name: {self.customer_name}
         Hotel name: {self.hotel.name}
@@ -47,10 +40,7 @@ class CreditCard:
 
     def validate(self, expiration, holder, cvc):
         card_data = {"number": self.number, "expiration": expiration, "holder": holder, "cvc": cvc}
-        if card_data in df_cards:
-            return True
-        else:
-            return False  # will work with or without because it will return none if not true
+        return card_data in df_cards  # Simplified validation
 
 
 print(df)
@@ -65,6 +55,6 @@ if hotel.available():
         reservation_ticket = ReservationTicket(customer_name=name, hotel_object=hotel)
         print(reservation_ticket.generate())
     else:
-        print("Credit card is not valid !")
+        print("Credit card is not valid!")
 else:
-    print("Hotel is not available !")
+    print("Hotel is not available!")
