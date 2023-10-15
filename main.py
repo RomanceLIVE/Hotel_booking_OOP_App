@@ -1,6 +1,6 @@
 import pandas as pd  # Import Pandas with alias
 
-# Creating dataframe
+
 df = pd.read_csv("hotels.csv", dtype={"id": str})
 df_cards = pd.read_csv("cards.csv", dtype=str).to_dict(orient="records")
 
