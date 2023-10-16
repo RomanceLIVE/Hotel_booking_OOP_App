@@ -1,9 +1,9 @@
-import pandas
+import pandas as pd
 
 # Creating dataframe
 
-df = pandas.read_csv("hotels.csv", dtype={"id": str})
-df_cards = pandas.read_csv("cards.csv", dtype=str).to_dict(orient="records")
+df = pd.read_csv("hotels.csv", dtype={"id": str})
+df_cards = pd.read_csv("cards.csv", dtype=str).to_dict(orient="records")
 
 
 class Hotel:
