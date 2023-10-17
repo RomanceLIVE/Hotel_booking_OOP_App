@@ -48,7 +48,7 @@ class CreditCard:
         if card_data in df_cards:
             return True
         else:
-            return False  # will work with or without because it will return none if not true
+            return False
 
 
 print(df)
